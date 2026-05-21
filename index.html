@@ -364,94 +364,218 @@
 
   <script>
 
-    function mostrarMensagem(){
-      alert("Amandinha, que seus 15 anos sejam tão incríveis quanto sua amizade 💜✨");
+  function mostrarMensagem(){
+    alert("Amandinha, que seus 15 anos sejam tão incríveis quanto sua amizade 💜✨");
+  }
+
+  // =========================
+  // BANCO LOCAL
+  // =========================
+
+  let momentos = JSON.parse(localStorage.getItem("momentos")) || [];
+  let fotos = JSON.parse(localStorage.getItem("fotos")) || [];
+  let musicas = JSON.parse(localStorage.getItem("musicas")) || [];
+
+  // =========================
+  // CARREGAR DADOS
+  // =========================
+
+  window.onload = function(){
+
+    momentos.forEach(texto => {
+      criarMomento(texto);
+    });
+
+    fotos.forEach(src => {
+      criarFoto(src);
+    });
+
+    musicas.forEach(item => {
+      criarMusica(item.nome, item.link);
+    });
+
+  }
+
+  // =========================
+  // MOMENTOS
+  // =========================
+
+  function adicionarMomento(){
+
+    const texto = document.getElementById("momentoInput").value;
+
+    if(texto.trim() === ""){
+      alert("Escreva um momento primeiro 💜");
+      return;
     }
 
-    // MOMENTOS
+    momentos.push(texto);
 
-    function adicionarMomento(){
+    localStorage.setItem(
+      "momentos",
+      JSON.stringify(momentos)
+    );
 
-      const texto = document.getElementById("momentoInput").value;
+    criarMomento(texto);
 
-      if(texto.trim() === ""){
-        alert("Escreva um momento primeiro 💜");
-        return;
-      }
+    document.getElementById("momentoInput").value = "";
+  }
 
-      const card = document.createElement("div");
-      card.className = "moment-card";
+  function criarMomento(texto){
 
-      card.innerHTML = `
-        <span class="delete" onclick="this.parentElement.remove()">❌</span>
-        <h4>✨ Memória Especial</h4>
-        <p>${texto}</p>
-      `;
+    const card = document.createElement("div");
+    card.className = "moment-card";
 
-      document.getElementById("momentosContainer").appendChild(card);
+    card.innerHTML = `
+      <span class="delete">❌</span>
+      <h4>✨ Memória Especial</h4>
+      <p>${texto}</p>
+    `;
 
-      document.getElementById("momentoInput").value = "";
+    card.querySelector(".delete").onclick = function(){
+
+      card.remove();
+
+      momentos = momentos.filter(item => item !== texto);
+
+      localStorage.setItem(
+        "momentos",
+        JSON.stringify(momentos)
+      );
     }
 
-    // FOTOS
+    document.getElementById("momentosContainer").appendChild(card);
+  }
 
-    function adicionarFoto(){
+  // =========================
+  // FOTOS
+  // =========================
 
-      const input = document.getElementById("fotoInput");
+  function adicionarFoto(){
 
-      if(input.files.length === 0){
-        alert("Escolha uma foto 💜");
-        return;
-      }
+    const input = document.getElementById("fotoInput");
 
-      const arquivo = input.files[0];
-      const leitor = new FileReader();
-
-      leitor.onload = function(e){
-
-        const box = document.createElement("div");
-        box.className = "photo-box";
-
-        box.innerHTML = `
-          <span class="delete" onclick="this.parentElement.remove()">❌</span>
-          <img src="${e.target.result}">
-        `;
-
-        document.getElementById("galeriaFotos").appendChild(box);
-      }
-
-      leitor.readAsDataURL(arquivo);
+    if(input.files.length === 0){
+      alert("Escolha uma foto 💜");
+      return;
     }
 
-    // MUSICAS
+    const arquivo = input.files[0];
 
-    function adicionarMusica(){
+    const leitor = new FileReader();
 
-      const nome = document.getElementById("nomeMusica").value;
-      const link = document.getElementById("linkMusica").value;
+    leitor.onload = function(e){
 
-      if(nome.trim() === "" || link.trim() === ""){
-        alert("Preencha os campos 💜");
-        return;
-      }
+      const imagem = e.target.result;
 
-      const musica = document.createElement("div");
-      musica.className = "song";
+      fotos.push(imagem);
 
-      musica.innerHTML = `
-        <span class="delete" onclick="this.parentElement.remove()">❌</span>
-        <h4>🎵 ${nome}</h4>
-        <br>
-        <a href="${link}" target="_blank">Abrir música ✨</a>
-      `;
+      localStorage.setItem(
+        "fotos",
+        JSON.stringify(fotos)
+      );
 
-      document.getElementById("listaMusicas").appendChild(musica);
-
-      document.getElementById("nomeMusica").value = "";
-      document.getElementById("linkMusica").value = "";
+      criarFoto(imagem);
     }
 
-  </script>
+    leitor.readAsDataURL(arquivo);
 
+    input.value = "";
+  }
+
+  function criarFoto(src){
+
+    const box = document.createElement("div");
+    box.className = "photo-box";
+
+    box.innerHTML = `
+      <span class="delete">❌</span>
+      <img src="${src}">
+    `;
+
+    box.querySelector(".delete").onclick = function(){
+
+      box.remove();
+
+      fotos = fotos.filter(foto => foto !== src);
+
+      localStorage.setItem(
+        "fotos",
+        JSON.stringify(fotos)
+      );
+    }
+
+    document.getElementById("galeriaFotos").appendChild(box);
+  }
+
+  // =========================
+  // MUSICAS
+  // =========================
+
+  function adicionarMusica(){
+
+    const nome = document.getElementById("nomeMusica").value;
+
+    const link = document.getElementById("linkMusica").value;
+
+    if(nome.trim() === "" || link.trim() === ""){
+      alert("Preencha os campos 💜");
+      return;
+    }
+
+    const musicaObj = {
+      nome: nome,
+      link: link
+    };
+
+    musicas.push(musicaObj);
+
+    localStorage.setItem(
+      "musicas",
+      JSON.stringify(musicas)
+    );
+
+    criarMusica(nome, link);
+
+    document.getElementById("nomeMusica").value = "";
+    document.getElementById("linkMusica").value = "";
+  }
+
+  function criarMusica(nome, link){
+
+    const musica = document.createElement("div");
+
+    musica.className = "song";
+
+    musica.innerHTML = `
+      <span class="delete">❌</span>
+
+      <h4>🎵 ${nome}</h4>
+
+      <br>
+
+      <a href="${link}" target="_blank">
+        Abrir música ✨
+      </a>
+    `;
+
+    musica.querySelector(".delete").onclick = function(){
+
+      musica.remove();
+
+      musicas = musicas.filter(item =>
+        !(item.nome === nome && item.link === link)
+      );
+
+      localStorage.setItem(
+        "musicas",
+        JSON.stringify(musicas)
+      );
+    }
+
+    document.getElementById("listaMusicas").appendChild(musica);
+  }
+
+</script>
 </body>
 </html>
