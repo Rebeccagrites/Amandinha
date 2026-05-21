@@ -118,6 +118,7 @@
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
       gap:20px;
+      margin-top:25px;
     }
 
     .moment-card{
@@ -126,6 +127,8 @@
       border-radius:20px;
       transition:0.3s;
       min-height:180px;
+      position:relative;
+      animation: aparecer 0.4s ease;
     }
 
     .moment-card:hover{
@@ -133,15 +136,45 @@
       background:rgba(255,255,255,0.2);
     }
 
-    .moment-card textarea{
+    .moment-card p{
+      margin-top:12px;
+      line-height:1.6;
+    }
+
+    textarea{
       width:100%;
-      height:100px;
+      height:120px;
       border:none;
       border-radius:15px;
       padding:15px;
       resize:none;
       outline:none;
       margin-top:10px;
+      font-size:1rem;
+    }
+
+    .save-btn{
+      margin-top:15px;
+      padding:12px 24px;
+      border:none;
+      border-radius:20px;
+      background:white;
+      color:#6f35d1;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .save-btn:hover{
+      transform:scale(1.05);
+    }
+
+    .delete{
+      position:absolute;
+      top:12px;
+      right:15px;
+      cursor:pointer;
+      font-size:1.1rem;
     }
 
     /* GALERIA */
@@ -150,10 +183,11 @@
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
       gap:20px;
+      margin-top:25px;
     }
 
     .photo-box{
-      height:260px;
+      min-height:260px;
       border:2px dashed rgba(255,255,255,0.5);
       border-radius:20px;
       display:flex;
@@ -163,6 +197,9 @@
       padding:20px;
       background:rgba(255,255,255,0.08);
       transition:0.3s;
+      overflow:hidden;
+      position:relative;
+      animation: aparecer 0.4s ease;
     }
 
     .photo-box:hover{
@@ -170,17 +207,37 @@
       transform:scale(1.02);
     }
 
+    .photo-box img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:18px;
+    }
+
+    input[type="file"]{
+      margin-top:10px;
+    }
+
     /* MÚSICAS */
 
     .music-list{
       display:grid;
       gap:20px;
+      margin-top:25px;
     }
 
     .song{
       background:rgba(255,255,255,0.15);
       padding:20px;
       border-radius:18px;
+      position:relative;
+      animation: aparecer 0.4s ease;
+    }
+
+    .song a{
+      color:white;
+      text-decoration:none;
+      word-break:break-word;
     }
 
     .song input{
@@ -190,6 +247,22 @@
       border:none;
       border-radius:12px;
       outline:none;
+    }
+
+    .music-inputs{
+      display:grid;
+      gap:15px;
+    }
+
+    @keyframes aparecer{
+      from{
+        opacity:0;
+        transform:translateY(15px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
     }
 
     footer{
@@ -244,69 +317,43 @@
     <section class="section">
       <h3>🌟 Nossos Momentos</h3>
 
-      <div class="moments">
+      <textarea id="momentoInput" placeholder="Escreva uma memória especial..."></textarea>
 
-        <div class="moment-card">
-          <h4>Momento 1</h4>
-          <textarea placeholder="Escreva uma memória especial..."></textarea>
-        </div>
+      <button class="save-btn" onclick="adicionarMomento()">
+        Salvar Momento 💜
+      </button>
 
-        <div class="moment-card">
-          <h4>Momento 2</h4>
-          <textarea placeholder="Uma viagem, risada ou história..."></textarea>
-        </div>
-
-        <div class="moment-card">
-          <h4>Momento 3</h4>
-          <textarea placeholder="Algo que marcou vocês..."></textarea>
-        </div>
-
-      </div>
+      <div class="moments" id="momentosContainer"></div>
     </section>
 
     <!-- GALERIA -->
     <section class="section">
       <h3>📸 Fotos da Nossa Amizade</h3>
 
-      <div class="gallery">
+      <input type="file" id="fotoInput" accept="image/*">
 
-        <div class="photo-box">
-          Adicione uma foto aqui 💜
-        </div>
+      <button class="save-btn" onclick="adicionarFoto()">
+        Adicionar Foto ✨
+      </button>
 
-        <div class="photo-box">
-          Coloque outra memória incrível ✨
-        </div>
-
-        <div class="photo-box">
-          Espaço para mais momentos 📷
-        </div>
-
-      </div>
+      <div class="gallery" id="galeriaFotos"></div>
     </section>
 
     <!-- MÚSICAS -->
     <section class="section">
       <h3>🎧 Músicas que Representam a Gente</h3>
 
-      <div class="music-list">
+      <div class="music-inputs">
+        <input type="text" id="nomeMusica" placeholder="Nome da música">
 
-        <div class="song">
-          <label>🎵 Música 1</label>
-          <input type="text" placeholder="Nome da música ou link do Spotify">
-        </div>
-
-        <div class="song">
-          <label>🎵 Música 2</label>
-          <input type="text" placeholder="Outra música especial">
-        </div>
-
-        <div class="song">
-          <label>🎵 Música 3</label>
-          <input type="text" placeholder="Mais uma música inesquecível">
-        </div>
-
+        <input type="text" id="linkMusica" placeholder="Cole o link do Spotify ou YouTube">
       </div>
+
+      <button class="save-btn" onclick="adicionarMusica()">
+        Salvar Música 🎵
+      </button>
+
+      <div class="music-list" id="listaMusicas"></div>
     </section>
 
     <footer>
@@ -316,9 +363,94 @@
   </div>
 
   <script>
+
     function mostrarMensagem(){
       alert("Amandinha, que seus 15 anos sejam tão incríveis quanto sua amizade 💜✨");
     }
+
+    // MOMENTOS
+
+    function adicionarMomento(){
+
+      const texto = document.getElementById("momentoInput").value;
+
+      if(texto.trim() === ""){
+        alert("Escreva um momento primeiro 💜");
+        return;
+      }
+
+      const card = document.createElement("div");
+      card.className = "moment-card";
+
+      card.innerHTML = `
+        <span class="delete" onclick="this.parentElement.remove()">❌</span>
+        <h4>✨ Memória Especial</h4>
+        <p>${texto}</p>
+      `;
+
+      document.getElementById("momentosContainer").appendChild(card);
+
+      document.getElementById("momentoInput").value = "";
+    }
+
+    // FOTOS
+
+    function adicionarFoto(){
+
+      const input = document.getElementById("fotoInput");
+
+      if(input.files.length === 0){
+        alert("Escolha uma foto 💜");
+        return;
+      }
+
+      const arquivo = input.files[0];
+      const leitor = new FileReader();
+
+      leitor.onload = function(e){
+
+        const box = document.createElement("div");
+        box.className = "photo-box";
+
+        box.innerHTML = `
+          <span class="delete" onclick="this.parentElement.remove()">❌</span>
+          <img src="${e.target.result}">
+        `;
+
+        document.getElementById("galeriaFotos").appendChild(box);
+      }
+
+      leitor.readAsDataURL(arquivo);
+    }
+
+    // MUSICAS
+
+    function adicionarMusica(){
+
+      const nome = document.getElementById("nomeMusica").value;
+      const link = document.getElementById("linkMusica").value;
+
+      if(nome.trim() === "" || link.trim() === ""){
+        alert("Preencha os campos 💜");
+        return;
+      }
+
+      const musica = document.createElement("div");
+      musica.className = "song";
+
+      musica.innerHTML = `
+        <span class="delete" onclick="this.parentElement.remove()">❌</span>
+        <h4>🎵 ${nome}</h4>
+        <br>
+        <a href="${link}" target="_blank">Abrir música ✨</a>
+      `;
+
+      document.getElementById("listaMusicas").appendChild(musica);
+
+      document.getElementById("nomeMusica").value = "";
+      document.getElementById("linkMusica").value = "";
+    }
+
   </script>
 
 </body>
