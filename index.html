@@ -5,255 +5,453 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Parabéns Amandinha</title>
 
-  <!-- Fonte moderna importada do Google Fonts -->
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-
   <style>
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family:'Segoe UI', sans-serif;
     }
 
     body{
-      /* Gradiente escuro, imersivo e luxuoso */
-      background: linear-gradient(135deg, #0b071a, #160e33, #23124d);
+      background: linear-gradient(135deg, #5b1ea8, #8f4cff, #b78cff);
       min-height:100vh;
       overflow-x:hidden;
-      color:#f3f0ff;
+      color:white;
       position:relative;
     }
 
-    /* ELEMENTOS DECORATIVOS (Visual Minimalista e Flutuante) */
+    /* ELEMENTOS DECORATIVOS */
+
     .decor{
       position:absolute;
-      opacity:0.25;
+      opacity:0.18;
+      animation: float 6s ease-in-out infinite;
       user-select:none;
-      filter: drop-shadow(0 0 15px rgba(143, 76, 255, 0.6));
     }
 
-    /* Animações individuais e dessincronizadas para maior naturalidade */
     .volley{
-      font-size:55px;
-      top: 12%;
-      left: 8%;
-      animation: floatY 5s ease-in-out infinite;
+      font-size:70px;
     }
 
     .music{
-      font-size:45px;
-      top: 20%;
-      right: 10%;
-      animation: floatX 6s ease-in-out infinite;
+      font-size:55px;
     }
 
     .uno{
-      font-size:50px;
-      bottom: 25%;
-      left: 12%;
-      animation: floatY 7s ease-in-out infinite;
+      font-size:60px;
     }
 
-    .music-2{
-      font-size:40px;
-      bottom: 15%;
-      right: 15%;
-      animation: floatX 5.5s ease-in-out infinite;
-    }
-
-    @keyframes floatY{
-      0%, 100%{ transform: translateY(0px) rotate(0deg); }
-      50%{ transform: translateY(-20px) rotate(10deg); }
-    }
-
-    @keyframes floatX{
-      0%, 100%{ transform: translateX(0px) rotate(0deg); }
-      50%{ transform: translateX(15px) rotate(-10deg); }
+    @keyframes float{
+      0%{transform:translateY(0px);}
+      50%{transform:translateY(-15px);}
+      100%{transform:translateY(0px);}
     }
 
     .container{
       position:relative;
       z-index:2;
-      padding:60px 24px;
-      max-width:1000px;
+      padding:40px 20px;
+      max-width:1200px;
       margin:auto;
     }
 
-    /* HERO SECTION (Tipografia de Grife e Efeito Neon) */
     .hero{
       text-align:center;
-      padding:60px 0 40px 0;
+      padding:80px 20px;
     }
 
     .hero h1{
-      font-size:4.5rem;
-      font-weight: 800;
-      letter-spacing: -2px;
-      background: linear-gradient(135deg, #ffffff 30%, #c4a2ff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom:15px;
-      filter: drop-shadow(0 4px 12px rgba(196, 162, 255, 0.3));
+      font-size:4rem;
+      margin-bottom:10px;
+      text-shadow:0 0 20px rgba(255,255,255,0.4);
     }
 
     .hero h2{
-      font-size:1.8rem;
+      font-size:2rem;
       font-weight:300;
-      color: #bfaaff;
-      letter-spacing: -0.5px;
-      margin-bottom:30px;
+      margin-bottom:25px;
     }
 
     .hero p{
-      max-width:600px;
+      max-width:700px;
       margin:auto;
-      font-size:1.15rem;
-      line-height:1.8;
-      color: #9d94b8;
-      font-weight: 400;
+      font-size:1.1rem;
+      line-height:1.7;
+      opacity:0.95;
     }
 
-    /* BOTÃO PREMIUM (Efeito Holográfico Blur no Hover) */
     .btn{
-      margin-top:40px;
-      padding:16px 36px;
-      border: none;
-      border-radius:100px;
-      background: #ffffff;
-      color:#11082c;
+      margin-top:30px;
+      padding:14px 28px;
+      border:none;
+      border-radius:30px;
+      background:white;
+      color:#6f35d1;
       font-size:1rem;
       cursor:pointer;
-      font-weight:600;
-      letter-spacing: -0.2px;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 20px rgba(143, 76, 255, 0.3);
+      font-weight:bold;
+      transition:0.3s;
     }
 
     .btn:hover{
-      transform: translateY(-4px);
-      background: #e9e4ff;
-      box-shadow: 0 12px 30px rgba(143, 76, 255, 0.5);
+      transform:scale(1.08);
     }
 
-    /* CARDS EM GLASSMORPHISM (Efeito de Vidro Fosco) */
     .section{
-      margin-top:80px;
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius:32px;
-      padding:48px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+      margin-top:70px;
+      background:rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border-radius:25px;
+      padding:35px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.2);
     }
 
     .section h3{
-      margin-bottom:20px;
-      font-size:2.2rem;
-      font-weight: 800;
-      letter-spacing: -1px;
-      background: linear-gradient(90deg, #ffffff, #8f4cff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin-bottom:25px;
+      font-size:2rem;
     }
 
-    /* Grid para os blocos de conteúdo */
-    .grid-hobbies {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      margin-top: 35px;
+    /* MOMENTOS */
+
+    .moments{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+      margin-top:25px;
     }
 
-    .hobby-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      padding: 30px;
-      border-radius: 20px;
-      transition: all 0.3s ease;
+    .moment-card{
+      background:rgba(255,255,255,0.15);
+      padding:20px;
+      border-radius:20px;
+      transition:0.3s;
+      min-height:180px;
+      position:relative;
+      animation: aparecer 0.4s ease;
     }
 
-    .hobby-card:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(143, 76, 255, 0.3);
-      transform: translateY(-2px);
+    .moment-card:hover{
+      transform:translateY(-8px);
+      background:rgba(255,255,255,0.2);
     }
 
-    .hobby-card h4 {
-      font-size: 1.25rem;
-      color: #fff;
-      margin-bottom: 10px;
+    .moment-card p{
+      margin-top:12px;
+      line-height:1.6;
     }
 
-    .hobby-card p {
-      color: #9d94b8;
-      font-size: 0.95rem;
-      line-height: 1.6;
+    textarea{
+      width:100%;
+      height:120px;
+      border:none;
+      border-radius:15px;
+      padding:15px;
+      resize:none;
+      outline:none;
+      margin-top:10px;
+      font-size:1rem;
     }
 
-    /* Footer sutil e limpo */
-    footer {
-      text-align: center;
-      margin-top: 80px;
-      font-size: 0.85rem;
-      color: #5d537a;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+    .save-btn{
+      margin-top:15px;
+      padding:12px 24px;
+      border:none;
+      border-radius:20px;
+      background:white;
+      color:#6f35d1;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
     }
 
-    /* Responsividade para telas menores */
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 3rem; }
-      .hero h2 { font-size: 1.4rem; }
-      .section { padding: 30px 20px; }
+    .save-btn:hover{
+      transform:scale(1.05);
+    }
+
+    .delete{
+      position:absolute;
+      top:12px;
+      right:15px;
+      cursor:pointer;
+      font-size:1.1rem;
+    }
+
+    /* GALERIA */
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      margin-top:25px;
+    }
+
+    .photo-box{
+      min-height:260px;
+      border:2px dashed rgba(255,255,255,0.5);
+      border-radius:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:20px;
+      background:rgba(255,255,255,0.08);
+      transition:0.3s;
+      overflow:hidden;
+      position:relative;
+      animation: aparecer 0.4s ease;
+    }
+
+    .photo-box:hover{
+      background:rgba(255,255,255,0.15);
+      transform:scale(1.02);
+    }
+
+    .photo-box img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:18px;
+    }
+
+    input[type="file"]{
+      margin-top:10px;
+    }
+
+    /* MÚSICAS */
+
+    .music-list{
+      display:grid;
+      gap:20px;
+      margin-top:25px;
+    }
+
+    .song{
+      background:rgba(255,255,255,0.15);
+      padding:20px;
+      border-radius:18px;
+      position:relative;
+      animation: aparecer 0.4s ease;
+    }
+
+    .song a{
+      color:white;
+      text-decoration:none;
+      word-break:break-word;
+    }
+
+    .song input{
+      width:100%;
+      margin-top:10px;
+      padding:12px;
+      border:none;
+      border-radius:12px;
+      outline:none;
+    }
+
+    .music-inputs{
+      display:grid;
+      gap:15px;
+    }
+
+    @keyframes aparecer{
+      from{
+        opacity:0;
+        transform:translateY(15px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    footer{
+      text-align:center;
+      padding:50px 20px 30px;
+      opacity:0.9;
+      font-size:1rem;
+    }
+
+    /* RESPONSIVO */
+
+    @media(max-width:700px){
+      .hero h1{
+        font-size:2.8rem;
+      }
+
+      .hero h2{
+        font-size:1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Ícones Flutuantes Estilizados -->
-  <div class="decor volley">🏐</div>
-  <div class="decor music">🎵</div>
-  <div class="decor uno">🃏</div>
-  <div class="decor music-2">⚡</div>
+  <!-- DECORAÇÕES -->
+  <div class="decor volley" style="top:5%; left:8%;">🏐</div>
+  <div class="decor music" style="top:15%; right:10%;">🎵</div>
+  <div class="decor uno" style="top:35%; left:5%;">🃏</div>
+  <div class="decor volley" style="bottom:20%; right:8%;">🏐</div>
+  <div class="decor music" style="bottom:10%; left:15%;">🎶</div>
+  <div class="decor uno" style="top:60%; right:15%;">🎴</div>
 
   <div class="container">
-    <header class="hero">
-      <h1>Amandinha.</h1>
-      <h2>Happy Birthday ✨</h2>
-      <p>Uma página minimalista dedicada a celebrar o seu dia. Que o seu novo ciclo seja repleto de conexões autênticas, tracks inesquecíveis e conquistas extraordinárias.</p>
-      <button class="btn">Explorar Homenagem</button>
-    </header>
 
-    <main>
-      <section class="section">
-        <h3>Lifestyle & Stats</h3>
-        <p style="color: #9d94b8; line-height: 1.7;">O que define a Amandinha no dia a dia:</p>
-        
-        <div class="grid-hobbies">
-          <div class="hobby-card">
-            <h4>Volleyball 🏐</h4>
-            <p>Foco, reflexo e a energia incomparável de quem domina as quadras.</p>
-          </div>
-          <div class="hobby-card">
-            <h4>Music Vibes 🎧</h4>
-            <p>A trilha sonora perfeita para guiar os melhores momentos da rotina.</p>
-          </div>
-          <div class="hobby-card">
-            <h4>Uno Player 🃏</h4>
-            <p>Estratégia pura (e algumas amizades em risco a cada carta +4 jogada).</p>
-          </div>
-        </div>
-      </section>
-    </main>
+    <!-- TOPO -->
+    <section class="hero">
+      <h1>Parabéns Amandinha 💜</h1>
+      <h2>15 anos ✨</h2>
+
+      <p>
+        Um cantinho especial para guardar nossos momentos,
+        nossas músicas, risadas, jogos de UNO,
+        vôlei e todas as memórias que fazem nossa amizade ser tão única. 💕
+      </p>
+
+      <button class="btn" onclick="mostrarMensagem()">
+        Clique aqui ✨
+      </button>
+    </section>
+
+    <!-- MOMENTOS -->
+    <section class="section">
+      <h3>🌟 Nossos Momentos</h3>
+
+      <textarea id="momentoInput" placeholder="Escreva uma memória especial..."></textarea>
+
+      <button class="save-btn" onclick="adicionarMomento()">
+        Salvar Momento 💜
+      </button>
+
+      <div class="moments" id="momentosContainer"></div>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="section">
+      <h3>📸 Fotos da Nossa Amizade</h3>
+
+      <input type="file" id="fotoInput" accept="image/*">
+
+      <button class="save-btn" onclick="adicionarFoto()">
+        Adicionar Foto ✨
+      </button>
+
+      <div class="gallery" id="galeriaFotos"></div>
+    </section>
+
+    <!-- MÚSICAS -->
+    <section class="section">
+      <h3>🎧 Músicas que Representam a Gente</h3>
+
+      <div class="music-inputs">
+        <input type="text" id="nomeMusica" placeholder="Nome da música">
+
+        <input type="text" id="linkMusica" placeholder="Cole o link do Spotify ou YouTube">
+      </div>
+
+      <button class="save-btn" onclick="adicionarMusica()">
+        Salvar Música 🎵
+      </button>
+
+      <div class="music-list" id="listaMusicas"></div>
+    </section>
 
     <footer>
-      Curated with 💜 for Amanda
+      Feito com carinho para Amandinha 💜
     </footer>
+
   </div>
+
+  <script>
+
+    function mostrarMensagem(){
+      alert("Amandinha, que seus 15 anos sejam tão incríveis quanto sua amizade 💜✨");
+    }
+
+    // MOMENTOS
+
+    function adicionarMomento(){
+
+      const texto = document.getElementById("momentoInput").value;
+
+      if(texto.trim() === ""){
+        alert("Escreva um momento primeiro 💜");
+        return;
+      }
+
+      const card = document.createElement("div");
+      card.className = "moment-card";
+
+      card.innerHTML = `
+        <span class="delete" onclick="this.parentElement.remove()">❌</span>
+        <h4>✨ Memória Especial</h4>
+        <p>${texto}</p>
+      `;
+
+      document.getElementById("momentosContainer").appendChild(card);
+
+      document.getElementById("momentoInput").value = "";
+    }
+
+    // FOTOS
+
+    function adicionarFoto(){
+
+      const input = document.getElementById("fotoInput");
+
+      if(input.files.length === 0){
+        alert("Escolha uma foto 💜");
+        return;
+      }
+
+      const arquivo = input.files[0];
+      const leitor = new FileReader();
+
+      leitor.onload = function(e){
+
+        const box = document.createElement("div");
+        box.className = "photo-box";
+
+        box.innerHTML = `
+          <span class="delete" onclick="this.parentElement.remove()">❌</span>
+          <img src="${e.target.result}">
+        `;
+
+        document.getElementById("galeriaFotos").appendChild(box);
+      }
+
+      leitor.readAsDataURL(arquivo);
+    }
+
+    // MUSICAS
+
+    function adicionarMusica(){
+
+      const nome = document.getElementById("nomeMusica").value;
+      const link = document.getElementById("linkMusica").value;
+
+      if(nome.trim() === "" || link.trim() === ""){
+        alert("Preencha os campos 💜");
+        return;
+      }
+
+      const musica = document.createElement("div");
+      musica.className = "song";
+
+      musica.innerHTML = `
+        <span class="delete" onclick="this.parentElement.remove()">❌</span>
+        <h4>🎵 ${nome}</h4>
+        <br>
+        <a href="${link}" target="_blank">Abrir música ✨</a>
+      `;
+
+      document.getElementById("listaMusicas").appendChild(musica);
+
+      document.getElementById("nomeMusica").value = "";
+      document.getElementById("linkMusica").value = "";
+    }
+
+  </script>
 
 </body>
 </html>
